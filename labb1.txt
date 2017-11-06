@@ -1,28 +1,41 @@
 Input space: employee != null
 
 Partion #1: starttime < 0 
-	test_m_part1: input: "starttime = -5", expected: addWorkingPeriod() = false
+	test_s1_part1: input: "starttime = -5", expected: addWorkingPeriod() = false
 Partion #2: endtime >= size
-	test_m_part2: input: "sceduleSize=10, endtime=14" expected: addWorkingPeriod() = false
+	test_s1_part2: input: "sceduleSize=10, endtime=14" expected: addWorkingPeriod() = false
 Partion #3: starttime > endtime
-	test_m_part3: input: "starttimee = 7, endTime = 4" expected: addWorkingPeriod() = false
+	test_s1_part3: input: "starttimee = 7, endTime = 4" expected: addWorkingPeriod() = false
 Partion #4: workingEmployees().length == requitedNumber
-	test_m_part4: input: "setRequiredNumber(0, 0, 2), starttime = 0, endtime = 2" expected: addWorkingPeriod() = false
+	test_s1_part4: input: "setRequiredNumber(0, 0, 2), starttime = 0, endtime = 2" expected: addWorkingPeriod() = false
 Partion #5: Partion1-5 false/otherwise
-	test_m_part5: input: "employee='A', starttime = 0, endtime = 2" expected: addWorkingPeriod() = true
+	test_s1_part5: input: "employee='A', starttime = 0, endtime = 2" expected: addWorkingPeriod() = true
 Partion #6: workingEmployees().contains(employee)
-	test_m_part6: input: "employee='A', starttime = 0, endtime = 2, workingEmployees(0,2).contains('A')" expected: addWorkingPeriod() = false
+	test_s1_part6: input: "employee='A', starttime = 0, endtime = 2, workingEmployees(0,2).contains('A')" expected: addWorkingPeriod() = false
 
 
 Border cases:
-	test_m_border1: input: "starttime = 0", expected: "addWorkingPeriod() = true"
-	test_m_border2: input: "starttime = -1", expected: "addWorkingPeriod() = false"
-	test_m_border3: input: "endtime = size-1", expected: "addWorkingPeriod() = true"
-	test_m_border4: input: "endtime = size", expected: "addWorkingPeriod() = false"
-	test_m_border5: input: "starttime = endtime", expected: "addWorkingPeriod() = true"
-	test_m_border6: input: "starttime > endtime", expected: "addWorkingPeriod() = false"
-	test_m_border7: input: "workingEmployees().length = requiredNumber - 1", expected: "addWorkingPeriod() = true"
-	test_m_border8: input: "workingEmployees().length = requiredNumber", expected: "addWorkingPeriod() = false"
-	test_m_border9: input: "workingEmployees(0, 2).contains('A') employee = 'A' starttime = 2, endTime = 4", expected: "addWorkingPeriod() = true" 
-	test_m_border10: input: "workingEmployees(0, 2).contains('A') employee = 'A' starttime = 1, endTime = 4", expected: "addWorkingPeriod() = false"
+	test_s1_border1: input: "starttime = 0", expected: "addWorkingPeriod() = true"
+	test_s1_border2: input: "starttime = -1", expected: "addWorkingPeriod() = false"
+	test_s1_border3: input: "endtime = size-1", expected: "addWorkingPeriod() = true"
+	test_s1_border4: input: "endtime = size", expected: "addWorkingPeriod() = false"
+	test_s1_border5: input: "starttime = endtime", expected: "addWorkingPeriod() = true"
+	test_s1_border6: input: "starttime > endtime", expected: "addWorkingPeriod() = false"
+	test_s1_border7: input: "workingEmployees().length = requiredNumber - 1", expected: "addWorkingPeriod() = true"
+	test_s1_border8: input: "workingEmployees().length = requiredNumber", expected: "addWorkingPeriod() = false"
+	test_s1_border9: input: "workingEmployees(0, 2).contains('A') employee = 'A' starttime = 2, endTime = 4", expected: "addWorkingPeriod() = true" 
+	test_s1_border10: input: "workingEmployees(0, 2).contains('A') employee = 'A' starttime = 1, endTime = 4", expected: "addWorkingPeriod() = false"
+           ^border10 ska krocka för att det redan finns en employee med samma namn den tiden
 	
+
+Input Space: starttime >= 0, endtime < size
+
+Partion #1: starttime > endtime 
+	test_s2_part1: input: "endtime = 3, starttime = 4", expected: "workingEmployees() = []"
+Partion #2: startime <= endtime
+	test_s2_part2: input: "starttime = 0, endtime = 4, expected: "workingEmployees() = String[]"
+
+Border cases: 
+	test_s2_border1: input: "starttime = endtime", Expected: "workingEmployees() = String[]"
+	test_s2_border2: input: "starttime = endtime - 1", Expected "workingEmployees() = String[]" 
+	test_s2_border3: input: "starttime = endtime + 1", Expected "workingEmployees() = []"
