@@ -1,6 +1,8 @@
 Bordercase 5? 
-Ska det verkligen fungera att lägga till ett arbetspass med samma start och sluttid?
+Ska det verkligen fungera att lÃ¤gga till ett arbetspass med samma start och sluttid?
 
-startTimeBiggerThanEndtime, vilken assert är att föredra?
+startTimeBiggerThanEndtime, vilken assert Ã¤r att fÃ¶redra?
 
-hur funkar det med timmarna? Är det påbörjad timme eller är ett intervall?
+hur funkar det med timmarna? Ã„r det pÃ¥bÃ¶rjad timme eller Ã¤r ett intervall?
+
+Vilket filformat pÃ¥ inlÃ¤mningen?
