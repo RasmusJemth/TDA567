@@ -10,3 +10,5 @@ Vilket filformat på inlämningen?
 Insert metoden fungerar som den ska?
 
 Hur gör man for loopar i Control Flow graph.
+
+Aritmetisk tripel??
