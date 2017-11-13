@@ -25,7 +25,7 @@ Border cases:
 	test_s1_border8: input: "workingEmployees().length = requiredNumber", expected: "addWorkingPeriod() = false"
 	test_s1_border9: input: "workingEmployees(0, 2).contains('A') employee = 'A' starttime = 2, endTime = 4", expected: "addWorkingPeriod() = true" 
 	test_s1_border10: input: "workingEmployees(0, 2).contains('A') employee = 'A' starttime = 1, endTime = 4", expected: "addWorkingPeriod() = false"
-           ^border10 ska krocka för att det redan finns en employee med samma namn den tiden
+           ^border10 ska krocka fÃ¶r att det redan finns en employee med samma namn den tiden
 	
 
 Input Space: starttime >= 0, endtime < size
@@ -36,12 +36,25 @@ Partion #2: startime <= endtime
 	test_s2_part2: input: "starttime = 0, endtime = 4, expected: "workingEmployees() = String[]"
 
 Border cases: 
+	workingPeriod = wp, workingEmployees = we
+	test_s2_barder1: input: "we.starttime = wp.starttime, ", Expected "workingEmployees() = [+] 
+	test_s2_barder2: input: "we.endtime + 1 = wp.endtime, ", Expected "workingEmployees() = [+]
+	test_s2_barder3: input: "we.starttime + 1 = wp.starttime, we.endtime - 1 = wp.endtime", Expected "workingEmployees() = [+]
+	test_s2_barder4: input: "we.starttime = wp.starttime, we.endtime = wp.endtime", Expected "workingEmployees() = [+]
+	test_s2_barder5: input: "we.starttime - 1 = wp.starttime, we.endtime + 1 = wp.endtime", Expected "workingEmployees() = [+]
+	test_s2_barder6: input: "we.starttime + 1 = wp.starttime, we.endtime - 1 = wp.starttime", Expected "workingEmployees() = [+]
+	test_s2_barder7: input: "we.endtime - 1 = wp.starttime, we.endtime + 1 = wp.endtime", Expected "workingEmployees() = [+]
+	test_s2_barder8: input: "we.starttime - 1 = wp.starttime, we.starttime + 1 = wp.starttime", Expected "workingEmployees() = [+]
+	test_s2_barder9: input: "we.endtime - 1 = wp.starttime, we.endtime + 1 = wp.endtime", Expected "workingEmployees() = [+]
+	test_s2_barder10: input: "we.starttime = wp.starttime", Expected "workingEmployees() = [+]
+
+
 	test_s2_border1: input: "starttime = endtime", Expected: "workingEmployees() = String[]"
 	test_s2_border2: input: "starttime = endtime - 1", Expected "workingEmployees() = String[]" 
 	test_s2_border3: input: "starttime = endtime + 1", Expected "workingEmployees() = []"
 
 	test_s2_border4: input: "addWorkingPeriod(name, s1, s2), starttime = s1, endtime = s1+1", Expected
-	test_s2_border4: input: "addWorkingPeriod(name, s1, s2), starttime = s1, endtime = (s1+s2)/2", Expected <--------- skriv något annat för endtime
+	test_s2_border4: input: "addWorkingPeriod(name, s1, s2), starttime = s1, endtime = (s1+s2)/2", Expected <--------- skriv nÃ¥got annat fÃ¶r endtime
 	test_s2_border4: input: "addWorkingPeriod(name, s1, s2), starttime = s1, endtime = s2", Expected
 	test_s2_border4: input: "addWorkingPeriod(name, s1, s2), starttime = (s1+s2)/2, endtime = (s1+s2)/2 +1", Expected
 	test_s2_border4: input: "addWorkingPeriod(name, s1, s2), starttime = (s1+s2)/2, endtime = s2", Expected
