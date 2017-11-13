@@ -1,1 +1,4 @@
-
+The problem with the BinarySearch method is the that the "less than" operator should be a "greater than" operator.
+We used basic logging, with just print statements and a counter:
+  System.out.println("Run : " + counter + " left = " + left + " right : " + right);
+ Which were in the while loop, and printed for everytime the left/right had a new value.
