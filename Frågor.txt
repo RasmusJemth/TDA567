@@ -1,14 +1,8 @@
-Bordercase 5? 
-Ska det verkligen fungera att lägga till ett arbetspass med samma start och sluttid?
-
-startTimeBiggerThanEndtime, vilken assert är att föredra?
-
+﻿Ska det verkligen fungera att lägga till ett arbetspass med samma start och sluttid?
 hur funkar det med timmarna? Är det påbörjad timme eller är ett intervall?
 
-Vilket filformat på inlämningen?
-
-Insert metoden fungerar som den ska?
+Insert metoden fungerar som den ska? Ska den vara fel?
 
 Hur gör man for loopar i Control Flow graph.
 
-Aritmetisk tripel??
+Aritmetisk trippel??
