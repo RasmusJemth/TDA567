@@ -1,5 +1,10 @@
 Part a - addWorkingPeriod
 
+Explanation of why we divided the test cases as we did:
+	We chose to make test there the input was smaller, bigger and equals to the limits, that is 0, size of the scedule and the
+	number of required workers, even to add same person twice. This was because these were the different valuse that the method
+	ensured that it could handle. We than used border cases around these limits.
+
 Input space: employee != null
 
 Partion #1: starttime < 0 
@@ -35,7 +40,9 @@ Found Bugs: test_s1_part3(testStarttimeBiggerThanEndtime), startime = 5, endTime
 ----------------------------------------------------------------------------------------------------------------------------------
 Part b - workingEmployees
 
-
+Explanation: We divided the test into just two partitions because there only one "rule" that the method ensured it could handle,
+	that is that it could handle starttime <= endtime, so the partitions were starttime <= endtime and starttime > endtime.
+	Then we used border cases that were slightly lower or higher than these conditions.
 
 Input Space: starttime >= 0, endtime < size
 
