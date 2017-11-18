@@ -7,7 +7,7 @@ Partion #1: starttime < 0
 Partion #2: endtime >= size
 	test_s1_part2: input: "scheduleSize=10, endtime=14" expected: addWorkingPeriod() = false
 Partion #3: starttime > endtime
-	test_s1_part3: input: "starttime = 7, endTime = 4" expected: addWorkingPeriod() = false
+	test_s1_part3: input: "starttime = 5, endTime = 4" expected: addWorkingPeriod() = false
 Partion #4: workingEmployees().length == requiredNumber
 	test_s1_part4: input: "setRequiredNumber(0, 0, 2), starttime = 0, endtime = 2" expected: addWorkingPeriod() = false
 Partion #5: Partion1-5 false/otherwise
@@ -29,6 +29,9 @@ Border cases:
 	test_s1_border10: input: "workingEmployees(0, 2).contains('A') employee = 'A' starttime = 1, endTime = 4", expected: "addWorkingPeriod() = false"
            ^border10 ska krocka för att det redan finns en employee med samma namn den tiden
 
+
+
+Found Bugs: test_s1_part3(testStarttimeBiggerThanEndtime), startime = 5, endTime = 4, expected = false.
 ----------------------------------------------------------------------------------------------------------------------------------
 Part b - workingEmployees
 
@@ -54,3 +57,9 @@ Border cases:
 	border9b: input: "we.endtime - 1 = wp.starttime, we.endtime + 1 = wp.endtime", Expected "workingEmployees() = [+]
 	border10b: input: "we.starttime = wp.endtime", Expected "workingEmployees() = [-]
 	border11b: input: "we.endtime = wp.startime", Expected "workingEmployees() = [-]
+	
+	
+Found bugs: partition1b, starttime = 4, endtime = 2, starttime > endtime, therefore should result in and empty array.
+	    border3b, expected : non-empty arrray, returns an empty array.
+	    border10b, workingPeriod is just before the starttime of the workingEmployees() call, the array should therefore be empty, 	but is not.
+	    border 11b, same as before but with endtime.
