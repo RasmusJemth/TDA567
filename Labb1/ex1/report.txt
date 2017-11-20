@@ -37,6 +37,7 @@ Border cases:
 
 
 Found Bugs: test_s1_part3(testStarttimeBiggerThanEndtime), startime = 5, endTime = 4, expected = false.
+	    test_s1_border9, a worker should be able to work 0-2 and 2-4. Expected true
 ----------------------------------------------------------------------------------------------------------------------------------
 Part b - workingEmployees
 
