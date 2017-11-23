@@ -31,7 +31,7 @@ class LimitedStack{
       reads this; // Should this be "this"?
       {
         //forall top : int, capacity : int :: top == capacity - 1
-        top == capacity - 1
+        top >= capacity - 1
       }
 
       method Init(c : int)
@@ -77,7 +77,7 @@ class LimitedStack{
       modifies this`top, this.arr;
       requires !Full(); //&& Valid();
       requires Valid(); //top, capacity && arr, top, capacity
-      ensures Valid() && !Empty() && arr[top] == elem; //arr, top, capacity
+      ensures Valid() && !Empty() && arr[top] == elem && top == old(top) + 1; //arr, top, capacity
       {
         // if !Full(top, capacity){ //or as an if
         top := top + 1;
@@ -90,7 +90,7 @@ class LimitedStack{
       //reads this.arr, this.top;
       modifies this`top, this.arr;
       requires !Empty() && Valid(); //top && arr, top, capacity
-      ensures Valid(); //arr, top, capacity
+      ensures Valid() && top == old(top) - 1; //arr, top, capacity
       {
         //var elem : int;
         elem := arr[top];
@@ -123,9 +123,9 @@ class LimitedStack{
       //reads this.arr, this.top, this.capacity;
       modifies this.arr, this`top;
       requires Valid(); //arr, top, capacity
-      ensures Valid(); //arr, top, capacity
+      ensures Valid() /*&& arr[top-1] == elem*/; //arr, top, capacity
       {
-        if top == arr.Length - 1 //top, capacity
+        if top == capacity - 1 //top, capacity
         {
           Shift();
         }
