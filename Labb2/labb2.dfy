@@ -7,7 +7,7 @@ class LimitedStack{
 
       // This predicate express a class invariant: All objects of this calls should satisfy this.
     predicate Valid() //arr : array<int>, top : int, capacity : int
-	  //requires arr != null
+      //requires arr != null
       reads this; // Does this mean it reads all the variables?
       {
         /*
@@ -27,24 +27,30 @@ class LimitedStack{
         top == -1
       }
 
-      predicate Full() //top : int, capacity : int
+      predicate method Full() //top : int, capacity : int
       reads this; // Should this be "this"?
       {
         //forall top : int, capacity : int :: top == capacity - 1
-        top >= capacity - 1
+        top >= (capacity - 1)
+      }
+
+      predicate NotFull()
+      reads this;
+      {
+        top != capacity -1
       }
 
       method Init(c : int)
-      modifies this;
-      requires c > 0
-      ensures fresh(arr); // ensures arr is a newly created object.
-      // Additional post-condition to be given here!
-      ensures Valid(); //arr, top, c
-      ensures Empty(); //top
-      {
-        capacity := c;
-        arr := new int[c];
-        top := -1;
+        modifies this;
+        requires c > 0
+        ensures fresh(arr); // ensures arr is a newly created object.
+        // Additional post-condition to be given here!
+        ensures Valid(); //arr, top, c
+        ensures Empty(); //top
+        {
+          capacity := c;
+          arr := new int[c];
+          top := -1;
       }
 
       method isEmpty() returns (res : bool)
@@ -53,7 +59,7 @@ class LimitedStack{
         //var res : bool;
         //^ måste tydligen inte deklarera variabler om de står som returns
         //Får inte använda predicate i metoder, bara i specification
-        res := top == -1; //top
+        res := (top == -1); //top
       }
 
 
@@ -76,12 +82,16 @@ class LimitedStack{
       //Should we put this as an ensures or in an if?
       modifies this`top, this.arr;
       requires !Full(); //&& Valid();
+      //requires top != capacity - 1; //<-- this works for some reason
+      //requires NotFull();
       requires Valid(); //top, capacity && arr, top, capacity
-      ensures Valid() && !Empty() && arr[top] == elem && top == old(top) + 1; //arr, top, capacity
+      ensures Valid() && !Empty() && arr[top] == elem && top == old(top) + 1;
       {
-        // if !Full(top, capacity){ //or as an if
-        top := top + 1;
-        arr[top] := elem;
+        //var booly := Full();
+        //print booly;
+       //if !Full(){ //or as an if
+          top := top + 1;
+          arr[top] := elem;
         //}
       }
 
@@ -90,11 +100,12 @@ class LimitedStack{
       //reads this.arr, this.top;
       modifies this`top, this.arr;
       requires !Empty() && Valid(); //top && arr, top, capacity
-      ensures Valid() && top == old(top) - 1; //arr, top, capacity
+      ensures Valid() && top == old(top) - 1 && elem == old(arr[top]); //arr, top, capacity
       {
         //var elem : int;
         elem := arr[top];
         top := top - 1;
+        print top;
       }
 
       method Shift()
@@ -125,13 +136,18 @@ class LimitedStack{
       requires Valid(); //arr, top, capacity
       ensures Valid() /*&& arr[top-1] == elem*/; //arr, top, capacity
       {
-        if top == capacity - 1 //top, capacity
+        if Full() //top, capacity
         {
           Shift();
         }
         Push(elem);
       }
 
+      //FOR TESTING
+      method getTop() returns (topRet : int)
+      {
+        topRet := top;
+      }
 
 
 // When you are finished,  all the below assertions should be provable.
@@ -139,16 +155,25 @@ class LimitedStack{
       method Main(){
            var s := new LimitedStack;
            s.Init(3);
-
+                var whyyyyyyy := s.getTop();
+                print whyyyyyyy;
            assert s.Empty() && !s.Full();
-
+                var why := s.getTop();
+                print why;
            s.Push(27);
            assert !s.Empty();
-
+                var fuckThisFuckingShit := s.getTop();
+                print fuckThisFuckingShit;
            var e := s.Pop();
+           print e;
            assert e == 27;
-
+                var p := s.getTop();
+                print p;
+           /*
            s.Push(5);
+           var p1 := s.getTop();
+           print p1;
+
            s.Push(32);
            s.Push(9);
            assert s.Full();
@@ -163,6 +188,6 @@ class LimitedStack{
            var e3 := s.Peek();
            assert e3 == 99;
            assert s.arr[0] == 32;
-
+           */
        }
 }
