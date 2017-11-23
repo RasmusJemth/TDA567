@@ -30,7 +30,8 @@ class LimitedStack{
       predicate Full() //top : int, capacity : int
       reads this; // Should this be "this"?
       {
-        forall top : int, capacity : int :: top == capacity - 1
+        //forall top : int, capacity : int :: top == capacity - 1
+        top == capacity - 1
       }
 
       method Init(c : int)
@@ -51,6 +52,7 @@ class LimitedStack{
       {
         //var res : bool;
         //^ måste tydligen inte deklarera variabler om de står som returns
+        //Får inte använda predicate i metoder, bara i specification
         res := top == -1; //top
       }
 
@@ -72,9 +74,10 @@ class LimitedStack{
       method Push(elem : int)
       //reads this.arr, this.top, this.capacity;
       //Should we put this as an ensures or in an if?
-      requires !Full() && Valid(); //top, capacity && arr, top, capacity
-      ensures Valid(); //arr, top, capacity
-      modifies this`top, this`arr;
+      modifies this`top, this.arr;
+      requires !Full(); //&& Valid();
+      requires Valid(); //top, capacity && arr, top, capacity
+      ensures Valid() && !Empty() && arr[top] == elem; //arr, top, capacity
       {
         // if !Full(top, capacity){ //or as an if
         top := top + 1;
@@ -85,7 +88,7 @@ class LimitedStack{
       // Pops the top element off the stack.
       method Pop() returns (elem : int)
       //reads this.arr, this.top;
-      modifies this`top;
+      modifies this`top, this.arr;
       requires !Empty() && Valid(); //top && arr, top, capacity
       ensures Valid(); //arr, top, capacity
       {
@@ -95,11 +98,11 @@ class LimitedStack{
       }
 
       method Shift()
-      requires Valid() && !Empty(); //arr, top, capacity && top
+      requires Valid() && !Empty() //arr, top, capacity && top
       ensures Valid(); //arr, top, capacity
       ensures forall i : int :: 0 <= i < capacity - 1 ==> arr[i] == old(arr[i + 1]);
       ensures top == old(top) - 1;
-      modifies this`arr, this`top;
+      modifies this.arr, this`top;
       {
         var i : int := 0;
         while (i < capacity - 1 )
@@ -118,11 +121,11 @@ class LimitedStack{
       //Push onto full stack, oldest element is discarded.
       method Push2(elem : int)
       //reads this.arr, this.top, this.capacity;
-      modifies this`arr, this`top;
+      modifies this.arr, this`top;
       requires Valid(); //arr, top, capacity
       ensures Valid(); //arr, top, capacity
       {
-        if capacity == arr.Length //top, capacity
+        if top == arr.Length - 1 //top, capacity
         {
           Shift();
         }
