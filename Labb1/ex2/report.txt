@@ -1,8 +1,11 @@
 
-Bugs were found in the insert and the containsArithTriple method.
+Bugs were found in the insert, section and the containsArithTriple method.
 The bug in the insert method were that it could add an element twice in some cases, to fix that we change the breaks in the code to "return;"
 
 The bug in the containsArithTriple was due to i could be equals to j (i==j), instead of the condition j<=i in the for loop, we changed it to j<i.
 
+The bug in the section method was due to the index were incremented even when elements were removed. So if a array {1,2} were to use section on {1,2}, the result should be {}, but is {2}
+
 Our test cases satisfies both branch and statement coverage(the charts in the folder).
 For the given implementation of containsArithTriple we cant get branch coverage since the implementation if contains a bug so it is impossible to reach every branch. With our change to the method, we will get branch coverage with our test cases.
+
