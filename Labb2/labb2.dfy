@@ -31,7 +31,7 @@ class LimitedStack{
       reads this; // Should this be "this"?
       {
         //forall top : int, capacity : int :: top == capacity - 1
-        top >= (capacity - 1)
+        top >= (capacity-1)
       }
 
       predicate NotFull()
@@ -86,6 +86,7 @@ class LimitedStack{
       //requires NotFull();
       requires Valid(); //top, capacity && arr, top, capacity
       ensures Valid() && !Empty() && arr[top] == elem && top == old(top) + 1;
+      //ensures Valid() && !Empty();
       {
         //var booly := Full();
         //print booly;
@@ -169,11 +170,11 @@ class LimitedStack{
            assert e == 27;
                 var p := s.getTop();
                 print p;
-           /*
+
            s.Push(5);
            var p1 := s.getTop();
            print p1;
-
+ /*
            s.Push(32);
            s.Push(9);
            assert s.Full();
