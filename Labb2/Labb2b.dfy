@@ -19,3 +19,8 @@ requires sorted2(s)
 ensures sorted(s)
 {
 }
+
+predicate p2(a : seq<int>, b : seq<int>)
+{
+  forall i,j exists i,j :: a[i] == b[j] 
+}
