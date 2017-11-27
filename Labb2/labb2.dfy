@@ -46,7 +46,7 @@ class LimitedStack{
         ensures fresh(arr); // ensures arr is a newly created object.
         // Additional post-condition to be given here!
         ensures Valid(); //arr, top, c
-        ensures Empty(); //top
+        ensures Empty() && capacity == c; //top
         {
           capacity := c;
           arr := new int[c];
