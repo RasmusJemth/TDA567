@@ -1,4 +1,6 @@
-/BinarySearch.class
-/TestAddWorkingPeriod.class
-/TestWorkingEmployees.class
-/WorkScheduleTestSuite.class
+/Set.class
+/SetTestSuite.class
+/TestContains.class
+/TestInsert.class
+/TestMember.class
+/TestSection.class

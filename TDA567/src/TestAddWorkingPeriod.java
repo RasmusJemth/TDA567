@@ -1,3 +1,4 @@
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -15,7 +16,12 @@ public class TestAddWorkingPeriod {
 		
 		ws.setRequiredNumber(3, 0, 9);
 		
+		
 		assertFalse(ws.addWorkingPeriod(e1, -1, 5));
+		
+		WorkSchedule tmp = new WorkSchedule(10);
+		tmp.setRequiredNumber(3, 0, 9);
+		assertArrayEquals(ws.workingEmployees(0, 9), tmp.workingEmployees(0, 9));
 		
 	}
 	
@@ -25,6 +31,10 @@ public class TestAddWorkingPeriod {
 		ws.setRequiredNumber(3, 0, 9);
 		
 		assertFalse(ws.addWorkingPeriod(e1, 1, 10));
+		
+		WorkSchedule tmp = new WorkSchedule(10);
+		tmp.setRequiredNumber(3, 0, 9);
+		assertArrayEquals(ws.workingEmployees(0, 9), tmp.workingEmployees(0, 9));
 	}
 	
 	//Covers bordercase 6
@@ -33,6 +43,10 @@ public class TestAddWorkingPeriod {
 		ws.setRequiredNumber(1, 0, 9);
 		
 		assertFalse(ws.addWorkingPeriod(e1, 5, 4));
+		
+		WorkSchedule tmp = new WorkSchedule(10);
+		tmp.setRequiredNumber(3, 0, 9);
+		assertArrayEquals(ws.workingEmployees(0, 9), tmp.workingEmployees(0, 9));
 	}
 	
 	//Covers border 8
@@ -42,6 +56,11 @@ public class TestAddWorkingPeriod {
 		
 		assertTrue(ws.addWorkingPeriod(e1, 0, 2));
 		assertFalse(ws.addWorkingPeriod(e2, 0, 2));
+		
+		WorkSchedule tmp = new WorkSchedule(10);
+		tmp.setRequiredNumber(3, 0, 9);
+		tmp.addWorkingPeriod(e1, 0, 2);
+		assertArrayEquals(ws.workingEmployees(0, 9), tmp.workingEmployees(0, 9));
 	}
 	
 	//Covers border 9
@@ -57,6 +76,11 @@ public class TestAddWorkingPeriod {
 		ws.setRequiredNumber(2, 0, 4);
 		assertTrue(ws.addWorkingPeriod(e1, 0, 4));
 		assertFalse(ws.addWorkingPeriod(e1, 0, 4));
+		
+		WorkSchedule tmp = new WorkSchedule(10);
+		tmp.setRequiredNumber(3, 0, 9);
+		tmp.addWorkingPeriod(e1, 0, 4);
+		assertArrayEquals(ws.workingEmployees(0, 9), tmp.workingEmployees(0, 9));
 	}
 	
 	@Test
@@ -98,6 +122,11 @@ public class TestAddWorkingPeriod {
 		ws.setRequiredNumber(2, 0, 4);
 		assertTrue(ws.addWorkingPeriod(e1, 0, 2));
 		assertFalse(ws.addWorkingPeriod(e1, 1, 4));
+		
+		WorkSchedule tmp = new WorkSchedule(10);
+		tmp.setRequiredNumber(3, 0, 9);
+		tmp.addWorkingPeriod(e1, 0, 2);
+		assertArrayEquals(ws.workingEmployees(0, 9), tmp.workingEmployees(0, 9));
 	}
 	
 	
