@@ -5,7 +5,7 @@ Explanation of why we divided the test cases as we did:
 	number of required workers, even to add same person twice. This was because these were the different valuse that the method
 	ensured that it could handle. We than used border cases around these limits.
 
-Input space: employee != null
+Input space: employee != null, 0 <= starttime <= endtime < scheduleSize.
 
 Partion #1: starttime < 0 
 	test_s1_part1: input: "starttime = -5", expected: addWorkingPeriod() = false
