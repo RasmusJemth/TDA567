@@ -14,6 +14,7 @@ class Token{
   }
   method InvalidateToken()
   modifies this`cl;
+  requires this != null;
   ensures cl == -1;
   {
     cl := -1;
@@ -27,14 +28,16 @@ class EnrollmentStn {
   method Init()
   modifies this;
   //ensures fresh(fpSet);
+  ensures fpSet == {};
   {
     fpSet := {};
   }
 
-  method issueToken(fingerPrint : int, clearance : int) returns (t : Token)
+  method IssueToken(fingerPrint : int, clearance : int) returns (t : Token)
   modifies this`fpSet;
-  requires validClearance(clearance) && fingerPrint !in fpSet;
-  ensures fingerPrint in fpSet;
+  requires validClearance(clearance)
+  requires fingerPrint !in fpSet;
+  ensures fingerPrint in fpSet && t != null;
   {
     t := new Token;
     t.Init(fingerPrint, clearance);
@@ -57,20 +60,20 @@ class IDStn {
     doorOpen := false;
   }
 
-  method tryOpenDoor(fingerPrint : int, t : Token)
-  modifies this`alarm, this`doorOpen, t;
+  method TryOpenDoor(fingerPrint : int, t : Token)
+  modifies this`alarm, this`doorOpen, t`cl;
   requires t != null;
   ensures alarm == true || doorOpen == true; //implement xor?
   {
     if(t.fp != fingerPrint || t.cl < clearanceLevel){
-      t.InvalidateToken();
+      //t.InvalidateToken();s
       alarm := true;
     } else {
       doorOpen := true;
     }
   }
 
-  method closeDoor()
+  method CloseDoor()
   modifies this`doorOpen;
   ensures doorOpen == false;
   {
@@ -81,4 +84,20 @@ class IDStn {
 predicate validClearance(clearance : int)
 {
    0 <= clearance <= 2
+}
+
+method TestMain()
+{
+  //test case 1
+  var enrStn := new EnrollmentStn;
+  enrStn.Init();
+
+  var idStn := new IDStn;
+  idStn.Init(0);
+
+  var t1 := enrStn.IssueToken(1,2);
+
+  idStn.TryOpenDoor(1, t1);
+  assert idStn.doorOpen;
+
 }
