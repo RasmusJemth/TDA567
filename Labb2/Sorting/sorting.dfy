@@ -22,5 +22,5 @@ ensures sorted(s)
 
 predicate p2(a : seq<int>, b : seq<int>)
 {
-  forall i,j exists i,j :: a[i] == b[j] 
+    forall i :: 0 <= i < |a| ==> a[i] in b
 }
