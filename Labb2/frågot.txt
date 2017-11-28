@@ -1,1 +1,4 @@
-Hur noggrant måste beviset vara? Matematiskt eller bilder?
+﻿Hur noggrant måste beviset vara? Matematiskt eller bilder?
+-- så matematiskt som möjligt, "tänk som en dator"
+
+Ska vi spara clearance i enrollmentSTN?
