@@ -38,6 +38,7 @@ class EnrollmentStn {
   requires validClearance(clearance)
   requires fingerPrint !in fpSet;
   ensures fingerPrint in fpSet && t != null;
+  ensures fresh (t);
   {
     t := new Token;
     t.Init(fingerPrint, clearance);
@@ -66,7 +67,7 @@ class IDStn {
   ensures alarm == true || doorOpen == true; //implement xor?
   {
     if(t.fp != fingerPrint || t.cl < clearanceLevel){
-      //t.InvalidateToken();s
+      t.InvalidateToken();
       alarm := true;
     } else {
       doorOpen := true;
