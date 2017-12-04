@@ -104,8 +104,8 @@ class LimitedStack{
       modifies this.arr, this`top;
       requires Valid();
       ensures Valid() && !Empty() && arr[top] == elem;
-      ensures forall i :: 0 <= i <= old(top) ==> arr[i] == old(arr[i])
-            || forall i :: 1 <= i <= old(top) ==> arr[i-1] == old(arr[i]);
+      ensures old(Full()) ==> forall i :: 1 <= i <= old(top) ==> arr[i-1] == old(arr[i]);
+      ensures !old(Full()) ==> forall i :: 0 <= i <= old(top) ==> arr[i] == old(arr[i]);
       {
         if Full()
         {

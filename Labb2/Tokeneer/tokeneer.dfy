@@ -27,7 +27,6 @@ class EnrollmentStn {
 
   method Init()
   modifies this;
-  //ensures fresh(fpSet);
   ensures fpSet == {};
   {
     fpSet := {};
@@ -38,7 +37,7 @@ class EnrollmentStn {
   requires validClearance(clearance)
   requires fingerPrint !in fpSet;
   ensures fingerPrint in fpSet && t != null;
-  ensures fresh (t);
+  ensures fresh (t) && fingerPrint == t.fp && clearance == t.cl;
   {
     t := new Token;
     t.Init(fingerPrint, clearance);
@@ -63,14 +62,18 @@ class IDStn {
 
   method TryOpenDoor(fingerPrint : int, t : Token)
   modifies this`alarm, this`doorOpen, t`cl;
-  requires t != null;
-  ensures alarm == true || doorOpen == true; //implement xor?
+  requires t != null && !alarm && !doorOpen;
+  //ensures (alarm && !doorOpen) || (doorOpen && !alarm);
+  ensures t.fp == fingerPrint && old(t.cl) >= clearanceLevel ==> doorOpen && !alarm;
+  ensures t.fp != fingerPrint || old(t.cl) < clearanceLevel ==> !doorOpen && alarm;
   {
-    if(t.fp != fingerPrint || t.cl < clearanceLevel){
+    if(t.fp == fingerPrint && t.cl >= clearanceLevel){
+      doorOpen := true;
+      alarm := false;
+    } else {
       t.InvalidateToken();
       alarm := true;
-    } else {
-      doorOpen := true;
+      doorOpen := false;
     }
   }
 

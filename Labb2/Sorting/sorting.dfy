@@ -25,12 +25,13 @@ predicate p(a : seq<int>, b : seq<int>)
    multiset(a) == multiset(b)
 }
 
-// so wrong
+/* // so wrong
 predicate p2(a : seq<int>, b : seq<int>)
 {
     forall i :: 0 <= i < |a| ==> a[i] in b
 }
-
+*/
+/* //REMOVE
 method checkSeq(a : seq<int>, b : seq<int>) returns (equal : bool)
 {
   var bArr : array<int>;
@@ -54,7 +55,8 @@ method checkSeq(a : seq<int>, b : seq<int>) returns (equal : bool)
   }
   return true;
 }
-
+*/
+/* //REMOVE
 method findLargestVal(a : seq<int>) returns (val : int)
 requires |a| >= 1;
 //ensures val in a; //Kompilatorn säger att det här kanske inte håller
@@ -68,11 +70,12 @@ requires |a| >= 1;
     i := i - 1 ;
   }
 }
-
+*/
+/* //REMOVE
 method p3(a : seq<int>, b : seq<int>) returns (equal : bool)
 {
   var aLen := findLargestVal(a);
-  var bLen :=findLargestVal(b);
+  var bLen := findLargestVal(b);
   var aArr := new int[aLen];
   var bArr := new int[bLen];
   if(|a| != |b|) {return false;}
@@ -85,11 +88,20 @@ method p3(a : seq<int>, b : seq<int>) returns (equal : bool)
   }
   return (aArr == bArr);
 }
+*/
 
 
-function sort(a : array<int>)
-modifies this.a;
+method sort(a : array<int>)
+modifies a;
 requires a != null;
-ensures sorted2(), p2(old(a), a);
+ensures sorted2(a[..]) && p(old(a)[..], a[..]);
 {
+}
+
+method sort2(a : array<int>)
+modifies a;
+requires a != null;
+ensures sorted2(a[..]);
+{
+  //Implement sorting algorithm that removes duplicates
 }
