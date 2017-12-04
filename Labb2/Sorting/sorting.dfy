@@ -25,71 +25,42 @@ predicate p(a : seq<int>, b : seq<int>)
    multiset(a) == multiset(b)
 }
 
-/* // so wrong
 predicate p2(a : seq<int>, b : seq<int>)
 {
-    forall i :: 0 <= i < |a| ==> a[i] in b
+    sortArray(a) == sortArray(b)
 }
-*/
-/* //REMOVE
-method checkSeq(a : seq<int>, b : seq<int>) returns (equal : bool)
-{
-  var bArr : array<int>;
-  bArr := new int[|b|];
-  var i := |b| - 1;
-  while (i >= 0)
-    decreases i
-    {
-      bArr[i] := b[i];
-      i := i - 1;
-    }
-  var j := |a| - 1;
-  while (j < |a|)
-  decreases j
-  {
-    if a[j] in bArr{
-      //leta reda på elementet i bArr, ta bort det och skriv över bArr
-    } else {
-      return false;
-    }
-  }
-  return true;
-}
-*/
-/* //REMOVE
-method findLargestVal(a : seq<int>) returns (val : int)
-requires |a| >= 1;
-//ensures val in a; //Kompilatorn säger att det här kanske inte håller
-{
-  var i := |a| - 1;
-  val := a[0];
-  while (i >= 1)
-  decreases i
-  {
-    if (a[i] > val) {val := a[i];}
-    i := i - 1 ;
-  }
-}
-*/
-/* //REMOVE
-method p3(a : seq<int>, b : seq<int>) returns (equal : bool)
-{
-  var aLen := findLargestVal(a);
-  var bLen := findLargestVal(b);
-  var aArr := new int[aLen];
-  var bArr := new int[bLen];
-  if(|a| != |b|) {return false;}
-  var i := |a| - 1;
-  while (i >= 0)
-  decreases i
-  {
-    aArr[a[i]] := aArr[a[i]] + 1;
-    bArr[b[i]] := bArr[b[i]] + 1;
-  }
-  return (aArr == bArr);
-}
-*/
 
+method SortArray(a : seq<int>) returns (aArr : array<int>)
+{
+  var i := |a| - 1;
+  aArr := new int[|a|];
+  while(i >= 0)
+  decreases i
+  {
+    aArr[i] := a[i];
+    i := i - 1;
+  }
+  var j, max;
+  i := j;
+  while(i > 0)
+  decreases i
+  {
+    j := i - 1;
+    max := i;
+    while(j >= 0)
+    decreases j
+    {
+      if (aArr[max] < aArr[j]){
+        max := j;
+      }
+      j := j - 1;
+    }
+    var tempInt := aArr[i];
+    aArr[i] := aArr[max];
+    aArr[max] := tempInt;
+    i := i - 1;
+  }
+}
 
 method sort(a : array<int>)
 modifies a;
