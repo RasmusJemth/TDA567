@@ -27,39 +27,13 @@ predicate p(a : seq<int>, b : seq<int>)
 
 predicate p2(a : seq<int>, b : seq<int>)
 {
-    sortArray(a) == sortArray(b)
+    forall i :: 0 < i < |a| ==> Count(a[i],a) == Count(a[i],b)
 }
 
-method SortArray(a : seq<int>) returns (aArr : array<int>)
+function Count(val : int, s : seq<int>) : int
 {
-  var i := |a| - 1;
-  aArr := new int[|a|];
-  while(i >= 0)
-  decreases i
-  {
-    aArr[i] := a[i];
-    i := i - 1;
-  }
-  var j, max;
-  i := j;
-  while(i > 0)
-  decreases i
-  {
-    j := i - 1;
-    max := i;
-    while(j >= 0)
-    decreases j
-    {
-      if (aArr[max] < aArr[j]){
-        max := j;
-      }
-      j := j - 1;
-    }
-    var tempInt := aArr[i];
-    aArr[i] := aArr[max];
-    aArr[max] := tempInt;
-    i := i - 1;
-  }
+  if |s| == 0 then 0 else
+  if val == s[0] then Count(val, s[1..]) else Count(val, s[1..])
 }
 
 method sort(a : array<int>)
