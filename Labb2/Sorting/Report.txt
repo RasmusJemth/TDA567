@@ -1,6 +1,10 @@
-2a:
 
-2b:
+2b: From sorted1: s[i] >= s[j] : i > j ==> s[i]>=s[i-1]
+From sorted2: s[i] >= s[i-1] ==> s[i-1] >= s[i-2] ∧ s[i-2] >= s[i-3] ∧ ... ∧ s[1] >= s[0] ==> s[i] >= s[j] : i > j.
+
+The second definition is more convenient to use due to it only has to loop through the sequence once, so the time it takes to check
+that this predicate is true is O(n), the first definition needs to loop through n^2 times, so it takes O(n^2) time, which is much worse than O(n).
+
 
 3a: Check if two sequences of integers contains the same amount of every integer, e.g. {1, 1, 2}
 and {1, 2, 1}, both contains two 1:s and one 2.
