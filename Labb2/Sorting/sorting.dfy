@@ -33,7 +33,7 @@ predicate p2(a : seq<int>, b : seq<int>)
 function Count(val : int, s : seq<int>) : int
 {
   if |s| == 0 then 0 else
-  if val == s[0] then Count(val, s[1..]) else Count(val, s[1..])
+  if val == s[0] then 1 + Count(val, s[1..]) else Count(val, s[1..])
 }
 
 method sort(a : array<int>)
