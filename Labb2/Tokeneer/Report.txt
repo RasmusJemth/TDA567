@@ -1,0 +1,22 @@
+The EnrollmentStation clas only contains a set of fingerprint, an init method and a method for
+issuing tokens. The use of the class is just to issue tokens. So a set of fingerprints must be
+saved so that multiple tokens cant be issued to the same person. The reason why we chose to only
+have the issueToken functionality is that nothing else is relevent for a enrollment station,
+since the stations only role is to issue new tokens.
+Token contains an integer for fingerprint and clearence level. The only functionality of the token
+class is its Init method and the method InvalidateToken. The init method is called by 
+ErollmentStation and initializes the fingerprint and clearence variable.
+The InvalidateToken method is called from the IDStn class whenever a faulty attempt to open a door.
+The reason we put the Invalidate in the token class in that Token class is that the neither the 
+IDStn or the Enrollment keep track of the tokens after they are initialize, this also save some
+memory.
+IDStn contains two booleans alarm and doorOpen, which represent if the door is open and if the
+alarm is one/off. Contains one integer for the clearence level of the door. The Init method
+initializes the clearnce level with the given parameter, and sets the booleans to false.
+IDStn have a method TryOpenDoor which is called whenever a person tries to open the door. 
+It takes a fingerprint and the token from the person trying to open the door, if the entry is correct, 
+then open the door, if the entry is incorrect, then the alarm is raised, and the token is
+invalidated.
+The entry is correct if the fingerprint matches the one on the token and the clearence level of the
+token is as high or higher than the clearence level of the door.
+IDStn also contains the method CloseDoor which sets the doorOpen boolean to false.
