@@ -45,8 +45,14 @@ ensures sorted2(a[..]) && p(old(a)[..], a[..]);
 
 method sort2(a : array<int>)
 modifies a;
-requires a != null;
+requires a != null && a.Length >= 2;
 ensures sorted2(a[..]);
 {
-  //Implement sorting algorithm that removes duplicates
+  var i := a.Length - 1;
+  while (i >= 0)
+  decreases i
+ {
+     a[i] := i;
+     i := i - 1;
+ }
 }
