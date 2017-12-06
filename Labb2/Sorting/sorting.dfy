@@ -52,19 +52,22 @@ requires a != null;
 ensures sorted2(a[..]) && p(old(a)[..], a[..]);
 {
 }
-/*
-//4b, does not work
+
+//4b
 method sort2(a : array<int>)
 modifies a;
 requires a != null && a.Length >= 2;
 ensures sorted2(a[..]);
 {
-  var i := a.Length - 1;
+  var i := a.Length - 2;
+  a[a.Length-1] := 0;
   while (i >= 0)
   decreases i
+  invariant -1 <= i <= a.Length - 1
+  invariant a[i+1] == 0
+  invariant sorted2(a[i+1..])
  {
-     a[i] := i;
+     a[i] := 0;
      i := i - 1;
  }
 }
-*/
