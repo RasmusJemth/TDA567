@@ -7,7 +7,19 @@ post-condition.
 
 /*
 Question 2
-BEVIS HÄR
+Q -> wp(S,R)
+
+Q = {}
+S = if(x>y) big := x ∧ small := y,  else big := y ∧ small := x
+R = big > small
+
+{} -> wp(if(x>y) ==> big := x ∧ small := y, else big := y ∧ small := x, big > small)
+
+   (Conditional rule) ==> (x>y ==> wp(big := x ∧ small := y, big > small) ∧
+		 (x<=y ==> wp(big := y ∧ small := x, big > small)
+
+   (Assignment rule) ==> (x>y ==> x>y) ∧ (x<=y ==> y>x) = true ∧ false = false
+
 */
 
 /*
