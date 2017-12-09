@@ -19,7 +19,23 @@ method Abs(x : int) returns (y : int)
 
 /*
   2.
-  BEVIS HÄR
+  Q -> wp(S,R)
+
+Q = {}
+S = if(x>=0) then y:=x else y:=-x
+R = (y >= 0) ∧ (x >= 0 ==> y == x) ∧ (x < 0 ==> y == -x)
+
+{} -> wp(if(x>=0) then y:=x else y:=-x, (y >= 0) ∧ (x >= 0 ==> y == x) ∧ (x < 0 ==> y == -x))
+	
+    (Conditional rule)  ==> (x>=0 -> wp(y:=x, (y >= 0) ∧ (x >= 0 ==> y == x) ∧ (x < 0 ==> y == -x)
+		∧ (x<0 -> wp(y:=-x, (y >= 0) ∧ (x >= 0 ==> y == x) ∧ (x < 0 ==> y == -x)
+
+	==> (x>=0 -> wp(y:=x, (y >= 0) ∧ (x >= 0 ==> y == x) ∧
+		∧ (x<0 -> wp(y:=-x, (y >= 0) ∧ (x < 0 ==> y == -x)
+
+    (Assignment rule)  ==> (x>=0 -> x>=0 ∧ x==X) ∧ (x<0 -> -x >= 0 ∧ -x == -x)
+ 
+		= true
 
 */
 
